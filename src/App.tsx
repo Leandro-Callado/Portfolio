@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from 'react';
 
 // ─── Dados ────────────────────────────────────────────────────────────────────
 
@@ -32,7 +32,7 @@ const projects = [
     tagColor: "text-purple-400 bg-purple-500/15",
     barColor: "from-purple-600 to-pink-500",
     desc: "Iniciação Científica em desenvolvimento web na Unimontes, explorando novas abordagens de interface.",
-  techs: ["Python", "Django", "HTML", "CSS", "Tailwind","TypeScript"],
+    techs: ["Python", "Django", "HTML", "CSS", "Tailwind","TypeScript"],
   },
   {
     title: "Gerador de Resumos",
@@ -119,7 +119,7 @@ const EmailIcon = ({ color = "currentColor" }: { color?: string }) => (
 
 // ─── Subcomponente: label de seção ────────────────────────────────────────────
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionLabel({ children }: { children: ReactNode }) {
   return (
     <div
       className="section-label mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.14em] text-[#9b96b8]"
