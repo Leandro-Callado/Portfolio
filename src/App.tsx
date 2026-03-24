@@ -197,18 +197,27 @@ export default function App() {
           </div>
 
           <h1
-            className="mb-3 text-[clamp(40px,8vw,72px)] font-extrabold leading-none tracking-tight"
-            style={{ fontFamily: "'Syne', sans-serif" }}
-          >
-            <span className="text-[#FF6B35]">Leandro</span>
-            <br />
-            <span className="text-[#f0eefc]">Castilho</span>
-            <br />
-            <span className="text-[#00C2A8]">Feitosa</span>
-            <br />
-            <span className="text-[#7B2FBE]">Callado</span>
-          </h1>
+    className="mb-3 text-[clamp(40px,8vw,72px)] font-extrabold leading-none tracking-tight"
+    style={{ fontFamily: "'Syne', sans-serif" }}
+  >
+    {/* Criamos uma div flex para alinhar o primeiro nome e o GIF na mesma linha */}
+    <div className="flex items-center gap-4">
+      <span className="text-[#FF6B35]">Leandro</span>
+      {/* Insira seu GIF aqui */}
+      <img 
+        src="https://tenor.com/bYr2z.gif" 
+        alt="GIF decorativo ao lado do nome Leandro" 
+        className="h-[1em] w-[1em]" // O GIF escala de acordo com o tamanho da fonte
+      />
+    </div>
 
+    <br />
+    <span className="text-[#f0eefc]">Castilho</span>
+    <br />
+    <span className="text-[#00C2A8]">Feitosa</span>
+    <br />
+    <span className="text-[#7B2FBE]">Callado</span>
+  </h1>
           <p className="mb-7 text-xl font-light italic text-[#9b96b8]">
             Engenharia de Sistemas · Desenvolvedor Web · Pesquisador
           </p>
