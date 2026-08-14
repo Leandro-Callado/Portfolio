@@ -12,10 +12,12 @@ const ICONS = [
   {label:'Contato',href:'leandrocallado2@gmail.com',color:'text-purple-300',d:'M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z'},
 ]
 const TASKBAR = [
-  {label:'VS Code',color:'text-blue-400',d:'M23.15 2.587 18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 19.88V4.12a1.5 1.5 0 0 0-.85-1.533zm-5.146 14.861L10.826 12l7.178-5.448v10.896z'},
+  {label:'Python',color:'text-blue-400',d:'M23.15 2.587 18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 19.88V4.12a1.5 1.5 0 0 0-.85-1.533zm-5.146 14.861L10.826 12l7.178-5.448v10.896z'},
   {label:'Figma',color:'text-pink-400',d:'M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.354-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.019 3.019 3.019h3.117V1.471H8.148z'},
   {label:'PostgreSQL',color:'text-cyan-400',d:'M17.128 0a10.134 10.134 0 0 0-2.755.403C13.379.72 12.368 1.185 11.5 1.78 10.787.9 9.337.24 7.677.044 6.445-.1 5.145.04 4.013.55 1.7 1.54.112 3.486.005 5.97c-.05 1.237.154 2.36.5 3.25.347.89.79 1.52 1.307 1.89.518.37 1.043.462 1.53.33.5-.136.92-.507 1.202-.98.295-.498.46-1.12.502-1.83l.014-.313c.068-1.157-.038-2.15-.178-2.876-.14-.727-.31-1.187-.31-1.187l.974-.152s.164.436.312 1.195c.148.76.262 1.803.186 3.04l-.015.325c-.05.866-.254 1.637-.67 2.248-.416.61-1.038 1.043-1.795 1.237-.77.197-1.59.062-2.34-.452-.762-.52-1.348-1.362-1.75-2.424-.403-1.06-.617-2.33-.558-3.713.123-2.944 1.973-5.274 4.637-6.433 1.32-.575 2.826-.718 4.25-.553 1.38.16 2.652.72 3.55 1.66.67.706 1.1 1.588 1.252 2.552.15.963.025 1.98-.36 2.9-.77 1.84-2.578 3.12-4.736 3.478z'},
+  {label:'React', color:'text-red-400',d:''}
 ]
+
 
 export default function PortfolioPage() {
   const wrapRef = useRef(null)
@@ -74,7 +76,7 @@ export default function PortfolioPage() {
         {/* Main Hero Content */}
         <div className="relative z-20 flex flex-col justify-end px-6 md:px-12 py-8 w-full max-w-2xl h-full" style={{ justifyContent: 'flex-end', paddingBottom: '5rem' }}>
           <div className="hero-el flex items-center gap-2 mb-2 sm:mb-4">
-            <span className="text-lg sm:text-xl font-medium">{"Ol\u00e1! Eu sou o"}</span>
+            <span className="text-lg sm:text-xl font-medium">{"Ol\u00e1! Eu sou Leandro Callado"}</span>
             <span className="text-purple-300 text-xl sm:text-2xl drop-shadow-[0_0_8px_rgba(216,180,254,0.8)]">&#10022;</span>
           </div>
           <h1 className="hero-el font-black leading-none tracking-tight mb-1 text-5xl sm:text-6xl md:text-7xl">Desenvolvedor</h1>
@@ -92,9 +94,6 @@ export default function PortfolioPage() {
           </p>
           
           <div className="hero-el flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-            <button className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold bg-gradient-to-br from-purple-600 to-purple-800 hover:scale-105 transition-all shadow-[0_0_20px_rgba(147,51,234,0.4)] w-full sm:w-auto">
-              <span className="font-mono text-purple-200 text-xs">&gt;_</span> Ver projetos
-            </button>
             <button className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold border border-white/20 hover:bg-white/10 transition-all backdrop-blur-md w-full sm:w-auto">
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
               Sobre mim
