@@ -9,7 +9,7 @@ export const ICONS = [
 
 export const TASKBAR = [
   { label: 'Python', src: 'https://cdn.simpleicons.org/python/3776AB' },
-  { label: 'Django', src: 'https://cdn.simpleicons.org/django/092E20' },
+  { label: 'Django', src: 'https://cdn.simpleicons.org/django/0cf' },
   { label: 'React', src: 'https://cdn.simpleicons.org/react/61DAFB' },
   { label: 'Next.js', src: 'https://cdn.simpleicons.org/nextdotjs/white' },
   { label: 'PostgreSQL', src: 'https://cdn.simpleicons.org/postgresql/4169E1' },

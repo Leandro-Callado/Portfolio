@@ -3,11 +3,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { LandscapeSVG } from './landscape'
 import { ICONS, TASKBAR } from './constants'
+import { ExplorerModal } from './ExplorerModal'
 
 
 export default function PortfolioPage() {
   const wrapRef = useRef(null)
   const [timeStr, setTimeStr] = useState('')
+  const [isExplorerOpen, setExplorerOpen] = useState(false)
 
   useEffect(() => {
     setTimeStr(new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}))
@@ -81,8 +83,12 @@ export default function PortfolioPage() {
             Construo {"experi\u00eancias"} web, backend e mobile que conectam pessoas e ideias. Transformando conceitos em realidade digital.
           </p>
           
-          <div className="hero-el flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-            <button className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold border border-white/20 hover:bg-white/10 transition-all backdrop-blur-md w-full sm:w-auto">
+          <div className="hero-el flex mt-2">
+            <button 
+              onClick={() => setExplorerOpen(true)}
+              style={{ alignSelf: 'flex-start' }}
+              className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold border border-white/20 hover:bg-white/10 transition-all backdrop-blur-md"
+            >
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
               Sobre mim
             </button>
@@ -100,14 +106,18 @@ export default function PortfolioPage() {
         </div>
 
         {/* Tech Stack Bar at the Bottom */}
-        <div className="absolute bottom-0 left-0 w-full flex items-center justify-center gap-6 sm:gap-10 pb-6 pt-4 z-20 pointer-events-auto bg-gradient-to-t from-[#0d0620] to-transparent">
+        <div 
+          className="absolute left-0 w-full flex items-center justify-center gap-6 sm:gap-10 z-20 pointer-events-auto"
+          style={{ bottom: '16px' }}
+        >
           {TASKBAR.map(tech=>(
             <div key={tech.label} className="relative flex flex-col items-center justify-center transition-all duration-300 cursor-pointer hover:-translate-y-1 group">
               <img src={tech.src} alt={tech.label} className="w-8 h-8 sm:w-10 sm:h-10 object-contain hover:scale-110 transition-transform opacity-70 group-hover:opacity-100" />
             </div>
           ))}
         </div>
-
+        {/* Renderizar o Modal condicionalmente */}
+        {isExplorerOpen && <ExplorerModal onClose={() => setExplorerOpen(false)} />}
       </div>
     </div>
   )
