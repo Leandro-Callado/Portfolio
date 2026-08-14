@@ -2,21 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { LandscapeSVG } from './landscape'
-
-const ICONS = [
-  {label:'GitHub',href:'https://github.com/Leandro-Callado',color:'text-purple-400',d:'M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z'},
-  {label:'Help CLI',href:'https://github.com/Leandro-Callado/Help-CLI',color:'text-purple-400',d:'M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8c0-1.11-.89-2-2-2h-8l-2-2z'},
-  {label:'LinkedIn',href:'www.linkedin.com/in/leandro-castilho-feitosa-callado-676ab5269',color:'text-blue-400',d:'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'},
-  {label:'Projeto Sticker',href:'https://github.com/Leandro-Callado/Sticker',color:'text-purple-400',d:'M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8c0-1.11-.89-2-2-2h-8l-2-2z'},
-  {label:'Em breve',href:'#',color:'text-purple-400',d:'M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8c0-1.11-.89-2-2-2h-8l-2-2z'},
-  {label:'Contato',href:'leandrocallado2@gmail.com',color:'text-purple-300',d:'M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z'},
-]
-const TASKBAR = [
-  {label:'Python',color:'text-blue-400',d:'M23.15 2.587 18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 19.88V4.12a1.5 1.5 0 0 0-.85-1.533zm-5.146 14.861L10.826 12l7.178-5.448v10.896z'},
-  {label:'Figma',color:'text-pink-400',d:'M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.354-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.019 3.019 3.019h3.117V1.471H8.148z'},
-  {label:'PostgreSQL',color:'text-cyan-400',d:'M17.128 0a10.134 10.134 0 0 0-2.755.403C13.379.72 12.368 1.185 11.5 1.78 10.787.9 9.337.24 7.677.044 6.445-.1 5.145.04 4.013.55 1.7 1.54.112 3.486.005 5.97c-.05 1.237.154 2.36.5 3.25.347.89.79 1.52 1.307 1.89.518.37 1.043.462 1.53.33.5-.136.92-.507 1.202-.98.295-.498.46-1.12.502-1.83l.014-.313c.068-1.157-.038-2.15-.178-2.876-.14-.727-.31-1.187-.31-1.187l.974-.152s.164.436.312 1.195c.148.76.262 1.803.186 3.04l-.015.325c-.05.866-.254 1.637-.67 2.248-.416.61-1.038 1.043-1.795 1.237-.77.197-1.59.062-2.34-.452-.762-.52-1.348-1.362-1.75-2.424-.403-1.06-.617-2.33-.558-3.713.123-2.944 1.973-5.274 4.637-6.433 1.32-.575 2.826-.718 4.25-.553 1.38.16 2.652.72 3.55 1.66.67.706 1.1 1.588 1.252 2.552.15.963.025 1.98-.36 2.9-.77 1.84-2.578 3.12-4.736 3.478z'},
-  {label:'React', color:'text-red-400',d:''}
-]
+import { ICONS, TASKBAR } from './constants'
 
 
 export default function PortfolioPage() {
@@ -79,14 +65,16 @@ export default function PortfolioPage() {
             <span className="text-lg sm:text-xl font-medium">{"Ol\u00e1! Eu sou Leandro Callado"}</span>
             <span className="text-purple-300 text-xl sm:text-2xl drop-shadow-[0_0_8px_rgba(216,180,254,0.8)]">&#10022;</span>
           </div>
-          <h1 className="hero-el font-black leading-none tracking-tight mb-1 text-5xl sm:text-6xl md:text-7xl">Desenvolvedor</h1>
-          <h2 className="hero-el font-black leading-none tracking-tight mb-4 sm:mb-6 text-5xl sm:text-6xl md:text-7xl text-purple-500 drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+          <h1 className="hero-el font-black text-5xl sm:text-6xl md:text-7xl" style={{ color: 'white', lineHeight: 1, letterSpacing: '-0.025em', marginBottom: '0.25rem' }}>
+            Desenvolvedor
+          </h1>
+          <h2 className="hero-el font-black text-5xl sm:text-6xl md:text-7xl" style={{ color: '#a855f7', lineHeight: 1, letterSpacing: '-0.025em', marginBottom: '1.5rem' }}>
             Full Stack
           </h2>
           
           <div className="hero-el flex items-center gap-3 mb-4 sm:mb-6">
-            <div className="h-0.5 w-16 sm:w-24 rounded-full bg-gradient-to-r from-purple-500 to-transparent" />
-            <span className="text-purple-400 text-sm">&#10022;</span>
+            <div className="rounded-full" style={{ background: 'linear-gradient(to right, #a855f7, transparent)', height: '2px', width: '6rem' }} />
+            <span style={{ color: '#c084fc', fontSize: '0.875rem' }}>&#10022;</span>
           </div>
           
           <p className="hero-el text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 max-w-md">
@@ -110,9 +98,17 @@ export default function PortfolioPage() {
             </a>
           ))}
         </div>
-      </div>
 
-      {/* Removed taskbar as requested */}
+        {/* Tech Stack Bar at the Bottom */}
+        <div className="absolute bottom-0 left-0 w-full flex items-center justify-center gap-6 sm:gap-10 pb-6 pt-4 z-20 pointer-events-auto bg-gradient-to-t from-[#0d0620] to-transparent">
+          {TASKBAR.map(tech=>(
+            <div key={tech.label} className="relative flex flex-col items-center justify-center transition-all duration-300 cursor-pointer hover:-translate-y-1 group">
+              <img src={tech.src} alt={tech.label} className="w-8 h-8 sm:w-10 sm:h-10 object-contain hover:scale-110 transition-transform opacity-70 group-hover:opacity-100" />
+            </div>
+          ))}
+        </div>
+
+      </div>
     </div>
   )
 }
