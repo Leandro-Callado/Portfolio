@@ -16,6 +16,7 @@ export function ExplorerModal({ onClose }: { onClose: () => void }) {
   
   const [openedFile, setOpenedFile] = useState<string | null>(null)
   const [selectedFile, setSelectedFile] = useState<string | null>(null)
+  const [isMaximized, setIsMaximized] = useState(false)
 
   useEffect(() => {
     gsap.registerPlugin(Draggable)
@@ -41,6 +42,17 @@ export function ExplorerModal({ onClose }: { onClose: () => void }) {
     e.stopPropagation()
     e.preventDefault()
     onClose()
+  }
+
+  const toggleMaximize = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    e.preventDefault()
+    setIsMaximized(!isMaximized)
+    
+    // Reset transform when maximizing so it perfectly aligns to the top-left
+    if (!isMaximized && modalRef.current) {
+      gsap.set(modalRef.current, { x: 0, y: 0 })
+    }
   }
 
   // Conteúdo interno de cada arquivo
@@ -83,7 +95,7 @@ export function ExplorerModal({ onClose }: { onClose: () => void }) {
         <div className="p-6 text-gray-800 bg-white min-h-full pb-16">
           <div className="max-w-2xl mx-auto py-8">
             <h1 className="text-3xl font-black mb-1 border-b-2 border-gray-300 pb-2 text-gray-900">Leandro Callado</h1>
-            <p className="text-gray-500 text-sm mb-6">Desenvolvedor Full Stack | leandrocallado2@gmail.com</p>
+            <p className="text-gray-500 text-sm mb-6">Desenvolvedor Full Stack | leandrocallado.dev@gmail.com</p>
             
             <h2 className="text-lg font-bold text-blue-600 mt-6 mb-2 uppercase">Resumo Profissional</h2>
             <p className="text-sm leading-relaxed mb-4 text-gray-800">
@@ -115,13 +127,18 @@ export function ExplorerModal({ onClose }: { onClose: () => void }) {
       {/* Container Principal do Modal - Cor de fundo roxo acinzentado */}
       <div 
         ref={modalRef} 
-        className="w-full max-w-4xl h-[75vh] min-h-[500px] flex flex-col rounded-xl overflow-hidden shadow-2xl border border-white/10 relative"
+        className={`flex flex-col overflow-hidden shadow-2xl relative ${
+          isMaximized 
+            ? 'w-full h-full rounded-none border-none' 
+            : 'w-full max-w-2xl h-[70vh] min-h-[500px] rounded-xl border border-white/10'
+        }`}
         style={{ backgroundColor: '#181321', zIndex: 100000 }} /* Roxo muito escuro acinzentado */
       >
         
         {/* Barra de Título (Header) - Draggable Area */}
         <div 
           ref={headerRef} 
+          onDoubleClick={toggleMaximize}
           className="h-10 bg-[#120e18] flex items-center justify-between px-3 select-none cursor-move border-b border-white/5"
         >
           {/* Abas Esquerda */}
@@ -137,7 +154,14 @@ export function ExplorerModal({ onClose }: { onClose: () => void }) {
           {/* Controles da Janela Direita */}
           <div className="flex items-center">
             <button className="w-10 h-10 flex items-center justify-center text-gray-400 hover:bg-white/10 transition-colors" data-clickable="true">─</button>
-            <button className="w-10 h-10 flex items-center justify-center text-gray-400 hover:bg-white/10 transition-colors" data-clickable="true">□</button>
+            <button 
+              onClick={toggleMaximize} 
+              onPointerDown={(e) => e.stopPropagation()} 
+              data-clickable="true" 
+              className="w-10 h-10 flex items-center justify-center text-gray-400 hover:bg-white/10 transition-colors z-50 relative"
+            >
+              {isMaximized ? '❐' : '□'}
+            </button>
             <button 
               onClick={fecharModal} 
               onPointerDown={(e) => e.stopPropagation()} 
